@@ -1,3 +1,4 @@
+# Ryan Horlick
 import re
 import os
 import unittest
@@ -26,14 +27,22 @@ def find_word(string_list):
 
     # define the regular expression
 
+
     # loop through each line of the string list 
+
 
     # find all the words that match the regular expression in each line
     
     # loop through the found words and add the words to your empty list 
 
     #return the list of all words that start with the letter B, E, or T
-    pass
+    lst = []
+    for line in string_list:
+        line = line.rstrip()
+        found = re.findall(r'\b([A-Za-z]+)\d{3}([A-za-z]+)', line)
+        for word in found:
+            lst.append(word)
+    return lst
 
 
 def find_days(string_list):
@@ -50,7 +59,15 @@ def find_days(string_list):
     # loop through the found dates and only add the days to your empty list 
     
     #return the list of days
-    pass
+
+    lst = []
+    for line in string_list:
+        line = line.rstrip()
+        found = re.findall(r'(\b\d{1,2})[\/](\d{1,2})[\/](\d{4})', line)
+        for x in found:
+            lst.append(x[1])
+    return lst
+
 
 def find_domains(string_list):
     """ Return a list of web address domains from the list of strings the domains of a wbsite are after www. """
@@ -71,7 +88,15 @@ def find_domains(string_list):
     # add the domains to your empty list
     
     #return the list of domains
-    pass
+
+    lst = []
+    for line in string_list:
+        found = re.findall(r'https?://[\w.]+', line)
+        for x in found:
+            y = x.split('//')[1].strip('www.')
+            lst.append(y)
+    return lst
+
 
 class TestAllMethods(unittest.TestCase):
 
